@@ -8,31 +8,28 @@ export const MyProvider = ({ children }) => {
 
   useEffect(() => {
     const fetchPhotos = async () => {
-      const response = await axios.get("../public/photos.json");
+      const response = await axios.get("https://api.pexels.com/v1/curated", {
+        headers: {
+          Authorization: "RzYeCpD0EXFYKNLg9OSK5n0EDaqcxMXfPqw0Xwro2N729nHAyHJURDA0",
+        }
+      });
       setPhotos(response.data.photos);
     };
     fetchPhotos();
   }, []);
 
-  const addFavorite = (photo) => {
-      if (photos.includes(photo)) {
-        setPhotos(photos.filter((p) => p !== photo));
-      } else {
-        setPhotos([...photos, photo]);
-      }
-  }
-
   return (
     <MyContext.Provider value={photos}>
       {photos.map((photo, index) => (
-        <IconHeart
+        <img
           className="photo"
           key={index}
           src={photo.src.portrait}
           alt={photo.alt}
+
         />
       ))}
       {children}
     </MyContext.Provider>
   );
-};
+}
