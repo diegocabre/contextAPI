@@ -1,11 +1,20 @@
+import { MyContext } from "../context/MyContext";
+import { useContext } from "react";
 import "./Gallery.css";
-import { MyProvider } from "../context/MyProvider";
 
 export const Gallery = () => {
+  const { photos } = useContext(MyContext);
+
   return (
-    <div className="gallery grid-columns-4 grid gap-4 p-3 m-3 grid-rows-4 grid-flow-col auto-rows-max auto-cols-max auto-flow ">
-    <MyProvider>
-    </MyProvider>
+    <div className="gallery grid-columns-5 p-3 gap-3 grid grid-cols-5 grid-rows-3 md:grid md:grid-cols-5 md:grid-rows-3 ">
+      {photos.map((photo) => (
+        <img
+          key={photo.id}
+          src={photo.src.large}
+          alt={photo.photographer}
+          className="photo"
+        />
+      ))}
     </div>
-  );
+  )
 }

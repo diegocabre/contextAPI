@@ -1,10 +1,7 @@
-import { MyProvider } from "../context/MyProvider";
-
 const Favorites = () => {
   return (
     <div>
-      <h1>Favorites</h1>
-      <MyProvider></MyProvider>
+      <h1>Fotos Favoritas</h1>
     </div>
   );
 };
