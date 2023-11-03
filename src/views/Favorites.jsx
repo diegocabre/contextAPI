@@ -1,15 +1,12 @@
 import { MyProvider } from "../context/MyProvider";
 
 const Favorites = () => {
-  if (MyProvider === null) {
-    return null;
-  }
-
   return (
     <div>
       <h1>Favorites</h1>
+      <MyProvider></MyProvider>
     </div>
-  )
-}
+  );
+};
 
-export default Favorites
+export default Favorites;

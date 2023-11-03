@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import MyContext from "./MyContext";
+import IconHeart from "../components/IconHeart";
 
 export const MyProvider = ({ children }) => {
   const [photos, setPhotos] = useState([]);
@@ -13,18 +14,24 @@ export const MyProvider = ({ children }) => {
     fetchPhotos();
   }, []);
 
+  const addFavorite = (photo) => {
+      if (photos.includes(photo)) {
+        setPhotos(photos.filter((p) => p !== photo));
+      } else {
+        setPhotos([...photos, photo]);
+      }
+  }
+
   return (
     <MyContext.Provider value={photos}>
-      <div className="gallery grid-columns-4 grid gap-4 p-3 m-3 grid-rows-4 grid-flow-col auto-rows-max auto-cols-max auto-flow ">
-        {photos.map((photo, index) => (
-          <img
-            className="photo"
-            key={index}
-            src={photo.src.portrait}
-            alt={photo.alt}
-          />
-        ))}
-      </div>
+      {photos.map((photo, index) => (
+        <IconHeart
+          className="photo"
+          key={index}
+          src={photo.src.portrait}
+          alt={photo.alt}
+        />
+      ))}
       {children}
     </MyContext.Provider>
   );
